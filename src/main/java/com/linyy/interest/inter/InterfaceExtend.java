@@ -1,7 +1,7 @@
 package com.linyy.interest.inter;
 
 /**
- * 接口、继承 测试
+ * 接口和继承 是不是都可以实现多态
  */
 public class InterfaceExtend extends Ex implements Inter{
 
