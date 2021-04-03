@@ -5,7 +5,9 @@ import java.util.Arrays;
 
 public class HiddenLayer extends Layer {
 
-	public ArrayList<HiddenLayer> initLayer(HiddenLayer hiddenLayer, ArrayList<HiddenLayer> listOfHiddenLayer, InputLayer inputLayer, OutputLayer outputLayer) {
+	public ArrayList<HiddenLayer> initLayer(HiddenLayer hiddenLayer,
+			ArrayList<HiddenLayer> listOfHiddenLayer, InputLayer inputLayer,
+			OutputLayer outputLayer) {
 
 		ArrayList<Double> listOfWeightIn = new ArrayList<Double>();
 		ArrayList<Double> listOfWeightOut = new ArrayList<Double>();
@@ -23,16 +25,21 @@ public class HiddenLayer extends Layer {
 				if (i == 0) { // first
 					limitIn = inputLayer.getNumberOfNeuronsInLayer();
 					if (numberOfHiddenLayers > 1) {
-						limitOut = listOfHiddenLayer.get(i + 1).getNumberOfNeuronsInLayer();
+						limitOut = listOfHiddenLayer.get(i + 1)
+								.getNumberOfNeuronsInLayer();
 					} else {
-						limitOut = listOfHiddenLayer.get(i).getNumberOfNeuronsInLayer();
+						limitOut = listOfHiddenLayer.get(i)
+								.getNumberOfNeuronsInLayer();
 					}
 				} else if (i == numberOfHiddenLayers - 1) { // last
-					limitIn = listOfHiddenLayer.get(i - 1).getNumberOfNeuronsInLayer();
+					limitIn = listOfHiddenLayer.get(i - 1)
+							.getNumberOfNeuronsInLayer();
 					limitOut = outputLayer.getNumberOfNeuronsInLayer();
 				} else { // middle
-					limitIn = listOfHiddenLayer.get(i - 1).getNumberOfNeuronsInLayer();
-					limitOut = listOfHiddenLayer.get(i + 1).getNumberOfNeuronsInLayer();
+					limitIn = listOfHiddenLayer.get(i - 1)
+							.getNumberOfNeuronsInLayer();
+					limitOut = listOfHiddenLayer.get(i + 1)
+							.getNumberOfNeuronsInLayer();
 				}
 
 				for (int k = 0; k < limitIn; k++) {
@@ -62,20 +69,24 @@ public class HiddenLayer extends Layer {
 	}
 
 	public void printLayer(ArrayList<HiddenLayer> listOfHiddenLayer) {
-		System.out.println("### HIDDEN LAYER ###");
-		int h = 1;
-		for (HiddenLayer hiddenLayer : listOfHiddenLayer) {
-			System.out.println("Hidden Layer #" + h);
-			int n = 1;
-			for (Neuron neuron : hiddenLayer.getListOfNeurons()) {
-				System.out.println("Neuron #" + n);
-				System.out.println("Input Weights:");
-				System.out.println(Arrays.deepToString( neuron.getListOfWeightIn().toArray() ));
-				System.out.println("Output Weights:");
-				System.out.println(Arrays.deepToString( neuron.getListOfWeightOut().toArray() ));
-				n++;
+		if (listOfHiddenLayer.size() > 0) {
+			System.out.println("### HIDDEN LAYER ###");
+			int h = 1;
+			for (HiddenLayer hiddenLayer : listOfHiddenLayer) {
+				System.out.println("Hidden Layer #" + h);
+				int n = 1;
+				for (Neuron neuron : hiddenLayer.getListOfNeurons()) {
+					System.out.println("Neuron #" + n);
+					System.out.println("Input Weights:");
+					System.out.println(Arrays.deepToString(neuron
+							.getListOfWeightIn().toArray()));
+					System.out.println("Output Weights:");
+					System.out.println(Arrays.deepToString(neuron
+							.getListOfWeightOut().toArray()));
+					n++;
+				}
+				h++;
 			}
-			h++;
 		}
 	}
 }
